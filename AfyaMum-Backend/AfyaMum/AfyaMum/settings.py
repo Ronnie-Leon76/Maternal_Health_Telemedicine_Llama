@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'afyamum',
+    'authentication',
+    'core',
     'corsheaders',
     'rest_framework',
 ]
