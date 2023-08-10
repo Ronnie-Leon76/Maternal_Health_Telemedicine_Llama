@@ -66,3 +66,12 @@ typing-inspect==0.9.0
 typing_extensions==4.7.1
 urllib3==2.0.4
 yarl==1.9.2
+contextlib2==21.6.0
+Django==4.2.4
+idna==3.4
+python-dotenv==1.0.0
+schema==0.7.5
+sqlparse==0.4.4
+africastalking==1.2.5
+asgiref==3.7.2
+backports.zoneinfo==0.2.1
