@@ -26,12 +26,22 @@ SECRET_KEY = 'django-insecure-#6hjt)9bq0s6i85s4rr*%%u%z-f+)jp80e@-6b9at4wir53#$m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-ronnieleon7-maternalhea-xx5dzxtq7q5.ws-eu102.gitpod.io']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '8000-ronnieleon7-maternalhea-xx5dzxtq7q5.ws-eu102.gitpod.io'
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework.authtoken', # TODO https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
+
+    'authentication',
+    'core',
+    'corsheaders',
+    'rest_framework',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,23 +49,31 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'authentication',
-    'core',
-    'corsheaders',
-    'rest_framework',
 ]
 
 SITE_ID = 1
 
 
+# TODO https://www.django-rest-framework.org/tutorial/5-relationships-and-hyperlinked-apis/#adding-pagination
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    # TODO https://www.django-rest-framework.org/api-guide/authentication/#setting-the-authentication-scheme
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # TODO https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
+        'rest_framework.authentication.TokenAuthentication', # ! IMPORTANT => https://www.django-rest-framework.org/api-guide/authentication/#apache-mod_wsgi-specific-configuration
+    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ]
 }
 
-AUTH_USER_MODEL = "authentication.UserAccount"
+# ! SUSPENDED - suuhudujoseph@gmai.com (2023.08.10)
+# REASON reverting back to non-custom authentication
+# AUTH_USER_MODEL = "authentication.UserAccount"
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
@@ -103,7 +121,9 @@ CSRF_COOKIE_SECURE = True
 # Enable secure cookies for sessions
 SESSION_COOKIE_SECURE = True
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-ronnieleon7-maternalhea-xx5dzxtq7q5.ws-eu102.gitpod.io']
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-ronnieleon7-maternalhea-xx5dzxtq7q5.ws-eu102.gitpod.io'
+]
 
 
 ROOT_URLCONF = 'AfyaMum.urls'
