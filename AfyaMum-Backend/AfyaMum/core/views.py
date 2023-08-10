@@ -1,17 +1,13 @@
 from django.shortcuts import render
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics, permissions
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import Specialist, Mother, Appointment, AppointmentRequest
+from .models import Appointment, AppointmentRequest
 from .permission import IsOwnerOrReadOnly
 from .serializers import AppointmentSerializer, AppointmentRequestSerializer
 
