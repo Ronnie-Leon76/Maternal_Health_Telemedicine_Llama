@@ -7,4 +7,5 @@ urlpatterns = [
     path('appointments/<int:pk>/', AppointmentDetail.as_view()),
     path('appointmentrequest/', AppointmentRequestDetail.as_view()),
     path('appointmentrequest/<int:pk>/', AppointmentRequestDetail.as_view()),
+    path('accept-appointmentrequest/', accept_appointment_request),
 ]
