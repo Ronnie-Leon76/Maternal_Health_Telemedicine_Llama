@@ -55,6 +55,8 @@ REST_FRAMEWORK = {
     
 }
 
+AUTH_USER_MODEL = "authentication.UserAccount"
+
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
@@ -93,6 +95,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+# Enable secure cookies for CSRF protection
+CSRF_COOKIE_SECURE = True
+
+# Enable secure cookies for sessions
+SESSION_COOKIE_SECURE = True
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-ronnieleon7-maternalhea-xx5dzxtq7q5.ws-eu102.gitpod.io']
+
 
 ROOT_URLCONF = 'AfyaMum.urls'
 

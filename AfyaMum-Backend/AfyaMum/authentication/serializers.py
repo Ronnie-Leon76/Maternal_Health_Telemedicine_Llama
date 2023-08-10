@@ -1,34 +1,13 @@
 from rest_framework import serializers
-from core.models import Specialist, Mother, Appointment, AppointmentRequest
+from .models import Specialist, Mother
 
 class SpecialistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Specialist
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'password', 'phone_number', 'clinic', 'speciality', 'gender', 'residence']
 
 class MotherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mother
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'password', 'phone_number', 'clinic', 'gender', 'residence']
 
-class MotherSerializerWithToken(MotherSerializer):
-    token = serializers.SerializerMethodField(read_only=True)
-
-    class Meta:
-        model = Mother
-        fields = ['username', 'email', 'phone_number']
-
-    def get_token(self, obj):
-        token = RefreshToken.for_user(obj)
-        return str(token.access_token)
-
-class SpecialistSerializerWithToken(SpecialistSerializer):
-    token = serializers.SerializerMethodField(read_only=True)
-
-    class Meta:
-        model = Specialist
-        fields = '__all_'
-
-    def get_token(self, obj):
-        token = RefreshToken.for_user(obj)
-        return str(token.access_token)
