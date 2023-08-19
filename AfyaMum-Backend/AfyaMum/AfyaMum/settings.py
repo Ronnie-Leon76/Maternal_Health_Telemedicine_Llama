@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    '192.168.2.4',
+    '192.168.4.203',
     '8000-ronnieleon7-maternalhea-xx5dzxtq7q5.ws-eu102.gitpod.io'
 ]
 
@@ -41,7 +43,7 @@ INSTALLED_APPS = [
     'core',
     'corsheaders',
     'rest_framework',
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
