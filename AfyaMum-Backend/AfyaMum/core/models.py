@@ -14,6 +14,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name} Profile'
+    
+class Session(models.Model):
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='sessions')
+    date_posted = models.DateTimeField(auto_now_add=True)
+
+class Exchange(models.Model):
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name="exchanges")
+    body = models.TextField()
+    is_bot = models.BooleanField(default=False)
+    date_posted = models.DateTimeField(auto_now_add=True)
 
 # https://www.django-rest-framework.org/api-guide/authentication/#generating-tokens
 from django.conf import settings
