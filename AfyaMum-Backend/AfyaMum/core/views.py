@@ -10,6 +10,7 @@ from rest_framework import status
 # from .models import Appointment, AppointmentRequest
 from .permission import IsOwnerOrReadOnly
 # from .serializers import AppointmentSerializer, AppointmentRequestSerializer
+from .voicecall import VOICE
 
 # class AppointmentList(generics.ListCreateAPIView):
 #     queryset = Appointment.objects.all()
@@ -90,14 +91,16 @@ from .permission import IsOwnerOrReadOnly
 #         else:
 #             return self.destroy(request, *args, **kwargs)
 
-# @api_view(['PUT'])
-# @permission_classes([IsAuthenticated])
-# def accept_appointment_request(request, appointment_id, mother_id):
-#     user = request.user
-#     mother = get_object_or_404(Mother, id=mother_id)
-#     appointment = get_object_or_404(Appointment, id=appointment_id)
-#     if user != appointment.specialist:
-#         return Response(status=403)
-#     appointment.update(is_accepted=True)
-#     # Trigger SIgnal
-#     return Response('Appointment request accepted')
+@api_view(['POST'])
+#@permission_classes([IsAuthenticated])
+def accept_appointment_request(request, appointment_id, mother_id):
+    user = request.user
+    mother = get_object_or_404(Mother, id=mother_id)
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    if user != appointment.specialist:
+        return Response(status=403)
+    appointment.update(is_accepted=True)
+    mother_phone_number = mother.phone_number
+    voice = VOICE()
+    voice.call(mother_phone_number)
+    return Response('Appointment request accepted')
